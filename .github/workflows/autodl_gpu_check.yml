@@ -3,6 +3,9 @@ name: AutoDL Available GPUs Check
 on:
   schedule:
     - cron: '0 * * * *'
+  push:
+    branches:
+      - main
 
 jobs:
   check_gpus:
