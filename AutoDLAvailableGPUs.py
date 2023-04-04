@@ -2,8 +2,8 @@ import requests
 import pandas as pd
 import os
 
-SCKEY = os.environ['SCKEY']
-Authorization = os.environ['Authorization']
+SCKEY = os.environ.get('SCKEY') # ServerChan Key
+Authorization = os.environ.get('Authorization') # Authorization
 
 url = "https://www.autodl.com/api/v1/user/machine/list"
 
