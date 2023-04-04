@@ -39,8 +39,13 @@ else:
     print(f"请求失败，状态码：{response.status_code}")
 
 print(result_data)
-for i in range(pd.DataFrame(result_data['data']['list']).shape[0]):
-        if pd.DataFrame(result_data['data']['list'])['gpu_order_num'][i] >= 4:
-            data = {'text':'At Least 4-GPU A100-80G available now!',
-                    'desp':'At Least 4-GPU A100-80G available in ' + pd.DataFrame(result_data['data']['list']).iloc[i]['region_name']}
-            requests.post('https://sc.ftqq.com/%s.send'%(SCKEY), data=data)
+try:
+    for i in range(pd.DataFrame(result_data['data']['list']).shape[0]):
+            if pd.DataFrame(result_data['data']['list'])['gpu_order_num'][i] >= 4:
+                data = {'text':'At Least 4-GPU A100-80G available now!',
+                        'desp':'At Least 4-GPU A100-80G available in ' + pd.DataFrame(result_data['data']['list']).iloc[i]['region_name']}
+                requests.post('https://sc.ftqq.com/%s.send'%(SCKEY), data=data)
+except BaseException as e:
+    data = {'text':'Something wrong!',
+                    'desp':str(e)}
+    requests.post('https://sc.ftqq.com/%s.send'%(SCKEY), data=data)
