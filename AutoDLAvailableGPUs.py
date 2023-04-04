@@ -37,7 +37,8 @@ if response.status_code == 200:
     result_data = response.json()
 else:
     print(f"请求失败，状态码：{response.status_code}")
-    
+
+print(result_data)
 for i in range(pd.DataFrame(result_data['data']['list']).shape[0]):
         if pd.DataFrame(result_data['data']['list'])['gpu_order_num'][i] >= 4:
             data = {'text':'At Least 4-GPU A100-80G available now!',
